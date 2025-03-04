@@ -13,6 +13,10 @@ class UsuarioViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save()
     
+    # get /api/user/usuarios/ returns only the user that is logged in
+    def get_queryset(self):
+        return Usuario.objects.filter(id=self.request.user.id)
+    
     # patch /api/user/usuarios/{id}/ 
     def partial_update(self, request, **kwargs):
         id = kwargs.get('pk')
@@ -35,3 +39,8 @@ class UsuarioRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
     permission_classes = [AllowAny]  # Adicione autenticação
+
+class GuideViewSet(viewsets.ModelViewSet):
+    queryset = Usuario.objects.filter(tipo='Guia')
+    serializer_class = UsuarioSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
