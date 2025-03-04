@@ -48,8 +48,8 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 
     objects = UsuarioManager()
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'nome']
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email', 'nome']
 
     def __str__(self):
         return self.email
