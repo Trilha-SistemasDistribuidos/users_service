@@ -43,8 +43,16 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework',
 ]
+# Configuração de CORS
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",  # 🔹 Permite chamadas do Vite (React)
+    "http://127.0.0.1:5173",  # 🔹 Outra variação para localhost
+]
+
+CORS_ALLOW_CREDENTIALS = True  # 🔹 Permite envio de cookies e autenticação
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # 🔹 Adicione esta linha no topo
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
